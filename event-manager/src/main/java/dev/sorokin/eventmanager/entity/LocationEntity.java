@@ -2,11 +2,18 @@ package dev.sorokin.eventmanager.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Builder
 @Data
-public class Location {
+@Table(name = "location")
+@AllArgsConstructor
+@NoArgsConstructor
+public class LocationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
