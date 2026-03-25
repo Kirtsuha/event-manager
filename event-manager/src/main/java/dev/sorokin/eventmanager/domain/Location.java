@@ -18,5 +18,5 @@ public class Location {
 
     private Integer capacity;
 
-   private String description;
+    private String description;
 }

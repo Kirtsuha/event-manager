@@ -7,15 +7,21 @@ import dev.sorokin.eventmanager.mapper.LocationMapper;
 import dev.sorokin.eventmanager.repository.LocationRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class LocationService {
-    private LocationRepository repository;
-    private LocationMapper mapper;
+    private final LocationRepository repository;
+    private final LocationMapper mapper;
+
+    @Autowired
+    public LocationService(LocationRepository repository, LocationMapper mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
 
     @Transactional
     public Location getLocation(Long id) {
@@ -55,6 +61,10 @@ public class LocationService {
 
     @Transactional
     public void deleteLocation(Long id) {
+        LocationEntity entity = repository.getLocationEntitiesById(id);
+        if (entity == null) {
+            throw new NotFoundException("Location", id);
+        }
         repository.deleteById(id);
     }
 }
