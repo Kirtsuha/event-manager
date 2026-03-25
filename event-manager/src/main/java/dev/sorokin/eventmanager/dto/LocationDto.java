@@ -8,23 +8,23 @@ import lombok.Data;
 @Builder
 public class LocationDto {
 
-    @Null
+    @Null(message = "ID не должен быть прописан")
     private Long id;
 
-    @NotBlank
-    @Size(min = 3, max = 255)
+    @NotBlank(message = "Name должно быть не пустым")
+    @Size(min = 3, max = 255, message = "Длина name должна быть между 3 и 255 символами")
     private String name;
 
-    @NotBlank
-    @Size(min = 3, max = 255)
+    @NotBlank(message = "Address должно быть не пустым")
+    @Size(min = 3, max = 255, message = "Длина address должна быть между 3 и 255 символами")
     private String address;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Capacity должно быть не пустым")
+    @Positive(message = "Capacity должно быть положительным числом")
     private Integer capacity;
 
-    @NotBlank
-    @Size(max = 2000)
+    @NotBlank(message = "Description должно быть не пустым")
+    @Size(max = 2000, message = "Длина description должна быть короче 2000 символов")
     private String description;
 
 }
