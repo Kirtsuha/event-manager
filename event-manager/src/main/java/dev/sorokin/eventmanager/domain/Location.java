@@ -1,11 +1,7 @@
 package dev.sorokin.eventmanager.domain;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.Min;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Data
 @Builder

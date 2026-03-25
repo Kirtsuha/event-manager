@@ -3,7 +3,6 @@ package dev.sorokin.eventmanager.mapper;
 import dev.sorokin.eventmanager.domain.Location;
 import dev.sorokin.eventmanager.dto.LocationDto;
 import dev.sorokin.eventmanager.entity.LocationEntity;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 @Service
