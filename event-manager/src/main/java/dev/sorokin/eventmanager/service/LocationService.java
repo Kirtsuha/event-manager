@@ -52,7 +52,7 @@ public class LocationService {
             throw new NotFoundException("Location", id);
         }
         entity.setAddress(newLocation.getAddress());
-        entity.setName(newLocation.getAddress());
+        entity.setName(newLocation.getName());
         entity.setCapacity(newLocation.getCapacity());
         entity.setDescription(newLocation.getDescription());
         return mapper.entityToDomain(repository.save(entity));
