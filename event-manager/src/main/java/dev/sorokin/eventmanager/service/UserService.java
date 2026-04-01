@@ -7,7 +7,6 @@ import dev.sorokin.eventmanager.entity.UserEntity;
 import dev.sorokin.eventmanager.exceptions.NotFoundException;
 import dev.sorokin.eventmanager.mapper.UserMapper;
 import dev.sorokin.eventmanager.repository.UserRepository;
-import jakarta.validation.Valid;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,6 +32,7 @@ public class UserService {
                 .login(signUpRequest.getLogin())
                 .passwordHash(encoder.encode(signUpRequest.getPassword()))
                 .role(Role.USER.name())
+                .age(signUpRequest.getAge())
                 .build();
         return mapper.entityToDomain(repository.save(user));
     }
@@ -41,5 +41,10 @@ public class UserService {
         return mapper.entityToDomain(repository.findByLogin(login)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"))
         );
+    }
+
+    public User getUser(Long id) {
+        return mapper.entityToDomain(repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User", id)));
     }
 }

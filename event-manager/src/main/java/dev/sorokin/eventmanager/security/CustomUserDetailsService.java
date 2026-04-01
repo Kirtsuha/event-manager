@@ -1,9 +1,7 @@
 package dev.sorokin.eventmanager.security;
 
-import dev.sorokin.eventmanager.domain.User;
 import dev.sorokin.eventmanager.entity.UserEntity;
 import dev.sorokin.eventmanager.repository.UserRepository;
-import dev.sorokin.eventmanager.service.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

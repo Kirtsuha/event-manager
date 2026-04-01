@@ -10,12 +10,10 @@ import org.springframework.stereotype.Service;
 public class JwtAuthenticationService {
 
     private final AuthenticationManager authenticationManager;
-    private final AuthenticationProvider authenticationProvider;
     private final JwtTokenManager jwtTokenManager;
 
     public JwtAuthenticationService(AuthenticationManager authenticationManager, AuthenticationProvider authenticationProvider, JwtTokenManager jwtTokenManager) {
         this.authenticationManager = authenticationManager;
-        this.authenticationProvider = authenticationProvider;
         this.jwtTokenManager = jwtTokenManager;
     }
 

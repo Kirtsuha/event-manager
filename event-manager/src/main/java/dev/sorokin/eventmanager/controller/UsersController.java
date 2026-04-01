@@ -10,10 +10,9 @@ import dev.sorokin.eventmanager.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -39,5 +38,11 @@ public class UsersController {
     public ResponseEntity<JwtTokenResponse> authenticate(@Valid @RequestBody SignInDto signInRequest) {
         var token = jwtAuthenticationService.authenticateUser(signInRequest);
         return ResponseEntity.status(HttpStatus.OK).body(new JwtTokenResponse(token));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUsers(@PathVariable Long id) {
+        var user = service.getUser(id);
+        return ResponseEntity.status(HttpStatus.OK).body(mapper.domainToDto(user));
     }
 }

@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0004-add-age-column-to-users
+      author: course-team
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: age
+                  type: INT
+                  constraints:
+                    nullable: true
+      rollback:
+        - dropColumn:
+            tableName: users
+            columnName: age
