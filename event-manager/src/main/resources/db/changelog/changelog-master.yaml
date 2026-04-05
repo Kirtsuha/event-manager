@@ -3,3 +3,7 @@ databaseChangeLog:
       file: db/changelog/changesets/0001-starter-baseline.yaml
   - include:
       file: db/changelog/changesets/0002-create-location-table.yaml
+  - include:
+      file: db/changelog/changesets/0003-create-user-table.yaml
+  - include:
+      file: db/changelog/changesets/0004-add-age-to-users.yaml

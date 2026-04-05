@@ -29,3 +29,7 @@ springdoc:
   swagger-ui:
     path: /swagger-ui/index.html
     url: /openapi.yaml
+
+jwt:
+  lifetime: 86400000
+  secret-key: oYa85QCMCKssZ4OURAtCfOCCFcAxIb3hKhI8YPneGt1
