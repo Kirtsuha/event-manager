@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+        id: 0009-add-unique-constraint-registrations
+        author: course-team
+        changes:
+          - addUniqueConstraint:
+              constraintName: unique_event_user
+              tableName: registrations
+              columnNames: event_id, user_id
