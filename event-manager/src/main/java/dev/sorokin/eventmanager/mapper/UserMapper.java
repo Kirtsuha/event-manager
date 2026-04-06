@@ -15,6 +15,17 @@ public class UserMapper {
                 .password(entity.getPasswordHash())
                 .role(Role.valueOf(entity.getRole()))
                 .age(entity.getAge())
+                .registrations(entity.getRegistrations().stream().map())
+                .build();
+    }
+
+    public UserEntity domainToEntity(User domain) {
+        return UserEntity.builder()
+                .id(domain.getId())
+                .login(domain.getLogin())
+                .passwordHash(domain.getPassword())
+                .role(String.valueOf(domain.getRole()))
+                .age(domain.getAge())
                 .build();
     }
 

@@ -2,14 +2,12 @@ package dev.sorokin.eventmanager.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Builder
-@Data
+@Getter
+@Setter
 @Table(name = "location")
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,9 +1,14 @@
 package dev.sorokin.eventmanager.domain;
 
-import lombok.Builder;
-import lombok.Data;
+import dev.sorokin.eventmanager.entity.RegistrationEntity;
+import lombok.*;
 
-@Data
+import java.util.List;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class User {
     private String login;
@@ -15,4 +20,6 @@ public class User {
     private Role role;
 
     private Integer age;
+
+    private List<Registration> registrations;
 }
