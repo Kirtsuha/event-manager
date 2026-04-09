@@ -17,3 +17,7 @@ databaseChangeLog:
       file: db/changelog/changesets/0008-add-fk-registrations-to-users.yaml
   - include:
       file: db/changelog/changesets/0009-add-unique-constraint-registrations.yaml
+  - include:
+      file: db/changelog/changesets/0010-add-location-id-to-events.yaml
+  - include:
+      file: db/changelog/changesets/0011-add-event-relations.yaml

@@ -26,8 +26,8 @@ public class RegistrationMapper {
     public RegistrationEntity domainToEntity(Registration domain) {
         return RegistrationEntity.builder()
                 .id(domain.getId())
-                .user(userMapper.domainToEntity(domain.getUser()))
-                .event(eventMapper.domainToEntity(domain.getEvent()))
+                // .user(userMapper.domainToEntity(domain.getUser())) REMOVED
+                // .event(eventMapper.domainToEntity(domain.getEvent())) REMOVED
                 .build();
     }
 

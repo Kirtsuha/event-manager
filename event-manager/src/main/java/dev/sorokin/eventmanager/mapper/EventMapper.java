@@ -1,6 +1,7 @@
 package dev.sorokin.eventmanager.mapper;
 
 import dev.sorokin.eventmanager.domain.Event;
+import dev.sorokin.eventmanager.domain.Location;
 import dev.sorokin.eventmanager.domain.Registration;
 import dev.sorokin.eventmanager.domain.Status;
 import dev.sorokin.eventmanager.entity.EventEntity;
@@ -9,6 +10,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EventMapper {
+
+    private final LocationMapper locationMapper;
+
+    public EventMapper(LocationMapper locationMapper) {
+        this.locationMapper = locationMapper;
+    }
 
     public Event entityToDomain(EventEntity event) {
         return Event.builder()
@@ -19,8 +26,7 @@ public class EventMapper {
                 .maxPlaces(event.getMaxPlaces())
                 .status(Status.valueOf(event.getStatus()))
                 .occupiedPlaces(event.getOccupiedPlaces())
-                .registrations(event.getRegistrations().stream()
-                        .map(this::entityToDomainNoForeignClasses).toList())
+                .location(locationMapper.entityToDomain(event.getLocation()))
                 .build();
 
     }
@@ -34,24 +40,7 @@ public class EventMapper {
                 .maxPlaces(event.getMaxPlaces())
                 .status(event.getStatus().name())
                 .occupiedPlaces(event.getOccupiedPlaces())
-                .registrations(event.getRegistrations().stream()
-                        .map(this::domainToEntityNoForeignClasses).toList())
-                .build();
-    }
-
-    private RegistrationEntity domainToEntityNoForeignClasses(Registration domain) {
-        return RegistrationEntity.builder()
-                .id(domain.getId())
-                .user(null)
-                .event(null)
-                .build();
-    }
-
-    private Registration entityToDomainNoForeignClasses(RegistrationEntity entity) {
-        return Registration.builder()
-                .id(entity.getId())
-                .user(null)
-                .event(null)
+                // .location(locationMapper.domainToEntity(event.getLocation())) REMOVED
                 .build();
     }
 }

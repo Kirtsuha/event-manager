@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Builder
 @Getter
@@ -28,4 +30,7 @@ public class LocationEntity {
 
     @Column(name="description", length = 2000)
     private String description;
+
+    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<EventEntity> events;
 }

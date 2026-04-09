@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0010-add-location-id-to-events
+      author: course-team
+      changes:
+        - addColumn:
+            tableName: events
+            columns:
+              - column:
+                  name: location_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true  # Сначала nullable, так как могут быть существующие события
+        - addForeignKeyConstraint:
+            constraintName: fk_event_location
+            baseTableName: events
+            baseColumnNames: location_id
+            referencedTableName: location
+            referencedColumnNames: id
+            onDelete: SET NULL
+        - createIndex:
+            tableName: events
+            indexName: idx_events_location_id
+            columns:
+              - column:
+                  name: location_id

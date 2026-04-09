@@ -25,5 +25,7 @@ public class Event {
 
     private Status status;
 
-    private List<Registration> registrations;
+    private Location location;
+
+    private User user;
 }

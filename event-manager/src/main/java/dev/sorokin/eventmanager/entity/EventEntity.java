@@ -41,4 +41,12 @@ public class EventEntity {
 
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<RegistrationEntity> registrations;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id", nullable = false)
+    private LocationEntity location;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 }

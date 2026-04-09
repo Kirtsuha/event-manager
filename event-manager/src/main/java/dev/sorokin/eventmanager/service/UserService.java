@@ -7,6 +7,7 @@ import dev.sorokin.eventmanager.entity.UserEntity;
 import dev.sorokin.eventmanager.exceptions.NotFoundException;
 import dev.sorokin.eventmanager.mapper.UserMapper;
 import dev.sorokin.eventmanager.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class UserService {
     private final UserMapper mapper;
     private final PasswordEncoder encoder;
 
+    @Autowired
     public UserService(UserRepository repository, UserMapper mapper, PasswordEncoder encoder) {
         this.repository = repository;
         this.mapper = mapper;

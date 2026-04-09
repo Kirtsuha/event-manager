@@ -15,7 +15,6 @@ public class UserMapper {
                 .password(entity.getPasswordHash())
                 .role(Role.valueOf(entity.getRole()))
                 .age(entity.getAge())
-                .registrations(entity.getRegistrations().stream().map())
                 .build();
     }
 
