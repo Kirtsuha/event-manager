@@ -1,5 +1,6 @@
 package dev.sorokin.eventmanager.service;
 
+import dev.sorokin.eventmanager.domain.Event;
 import dev.sorokin.eventmanager.domain.Registration;
 import dev.sorokin.eventmanager.entity.EventEntity;
 import dev.sorokin.eventmanager.entity.RegistrationEntity;
@@ -24,16 +25,18 @@ public class RegistrationService {
     private final UserRepository userRepository;
     private final EventRepository eventRepository;
     private final RegistrationMapper mapper;
+    private final EventMapper eventMapper;
 
-    public RegistrationService(RegistrationRepository repository, UserRepository userRepository, EventRepository eventRepository, RegistrationMapper mapper) {
+    public RegistrationService(RegistrationRepository repository, UserRepository userRepository, EventRepository eventRepository, RegistrationMapper mapper, EventMapper eventMapper) {
         this.repository = repository;
         this.userRepository = userRepository;
         this.eventRepository = eventRepository;
         this.mapper = mapper;
+        this.eventMapper = eventMapper;
     }
 
     @Transactional
-    public Registration create(Long id, String currentUsername) {
+    public void create(Long id, String currentUsername) {
         UserEntity user = userRepository.getByLogin(currentUsername)
                 .orElseThrow(() -> new UsernameNotFoundException("User with login " + currentUsername + " not found"));
 
@@ -63,7 +66,7 @@ public class RegistrationService {
 
         eventRepository.save(event);
         userRepository.save(user);
-        return mapper.entityToDomain(repository.save(registration));
+        repository.save(registration);
     }
 
     @Transactional
@@ -86,14 +89,17 @@ public class RegistrationService {
     }
 
     @Transactional
-    public List<Registration> getMy(String currentUsername) {
+    public List<Event> getMy(String currentUsername) {
         UserEntity user = userRepository.getByLogin(currentUsername)
                 .orElseThrow(() -> new UsernameNotFoundException("User with login " + currentUsername + " not found"));
         if (Objects.equals(user.getRole(), "ADMIN")) {
             throw new AccessDeniedException("This method is only available for regular users, not administrators");
         }
 
-        return repository.findByUser(user).stream().map(mapper::entityToDomain).toList();
+        return repository.findByUser(user).stream()
+                .map(RegistrationEntity::getEvent)
+                .map(eventMapper::entityToDomain)
+                .toList();
     }
 
 }
