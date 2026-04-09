@@ -10,7 +10,7 @@ import lombok.*;
 public class Registration {
     private Long id;
 
-    private Event event;
+    private Long eventId;
 
-    private User user;
+    private Long userId;
 }

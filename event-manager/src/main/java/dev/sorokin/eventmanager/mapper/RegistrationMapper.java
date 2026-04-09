@@ -18,8 +18,8 @@ public class RegistrationMapper {
     public Registration entityToDomain(RegistrationEntity entity) {
         return Registration.builder()
                 .id(entity.getId())
-                .user(userMapper.entityToDomain(entity.getUser()))
-                .event(eventMapper.entityToDomain(entity.getEvent()))
+                .userId(entity.getUser().getId())
+                .eventId(entity.getEvent().getId())
                 .build();
     }
 
