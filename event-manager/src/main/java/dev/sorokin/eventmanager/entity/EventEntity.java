@@ -2,6 +2,7 @@ package dev.sorokin.eventmanager.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -28,6 +29,10 @@ public class EventEntity {
     @Positive
     @Column(name = "duration_minutes", nullable = false)
     private Integer durationMinutes;
+
+    @PositiveOrZero
+    @Column(name = "cost", nullable = false)
+    private Integer cost;
 
     @Positive
     @Column(name = "max_places", nullable = false)

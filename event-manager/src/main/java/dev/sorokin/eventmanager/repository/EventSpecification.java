@@ -25,11 +25,11 @@ public class EventSpecification {
             }
 
             if (dto.getDateStartAfter() != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("dateStart"), dto.getDateStartAfter()));
+                predicates.add(cb.greaterThanOrEqualTo(root.get("startAt"), dto.getDateStartAfter()));
             }
 
             if (dto.getDateStartBefore() != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("dateStart"), dto.getDateStartBefore()));
+                predicates.add(cb.lessThanOrEqualTo(root.get("startAt"), dto.getDateStartBefore()));
             }
 
             if (dto.getCostMin() != null) {
@@ -41,11 +41,11 @@ public class EventSpecification {
             }
 
             if (dto.getDurationMin() != null) {
-                predicates.add(cb.greaterThanOrEqualTo(root.get("duration"), dto.getDurationMin()));
+                predicates.add(cb.greaterThanOrEqualTo(root.get("durationMinutes"), dto.getDurationMin()));
             }
 
             if (dto.getDurationMax() != null) {
-                predicates.add(cb.lessThanOrEqualTo(root.get("duration"), dto.getDurationMax()));
+                predicates.add(cb.lessThanOrEqualTo(root.get("durationMinutes"), dto.getDurationMax()));
             }
 
             if (dto.getLocationId() != null) {
@@ -53,7 +53,7 @@ public class EventSpecification {
             }
 
             if (dto.getEventStatus() != null) {
-                predicates.add(cb.equal(root.get("status"), dto.getEventStatus()));
+                predicates.add(cb.equal(root.get("status"), dto.getEventStatus().name()));
             }
 
             return cb.and(predicates.toArray(new Predicate[0]));

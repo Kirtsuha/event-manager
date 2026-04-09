@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0012-add-cost-to-events
+      author: kirill
+      changes:
+        - addColumn:
+            tableName: events
+            columns:
+              - column:
+                  name: cost
+                  type: INT
+                  defaultValue: 0
+                  constraints:
+                    nullable: false

@@ -21,11 +21,13 @@ public class Event {
 
     private Integer maxPlaces;
 
+    private Integer cost;
+
     private Integer occupiedPlaces;
 
     private Status status;
 
-    private Location location;
+    private Long locationId;
 
-    private User user;
+    private Long userId;
 }

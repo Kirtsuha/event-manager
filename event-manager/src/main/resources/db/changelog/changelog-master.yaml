@@ -21,3 +21,5 @@ databaseChangeLog:
       file: db/changelog/changesets/0010-add-location-id-to-events.yaml
   - include:
       file: db/changelog/changesets/0011-add-event-relations.yaml
+  - include:
+      file: db/changelog/changesets/0012-add-cost-to-events.yaml
