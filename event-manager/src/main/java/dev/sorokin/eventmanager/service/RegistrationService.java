@@ -1,7 +1,6 @@
 package dev.sorokin.eventmanager.service;
 
 import dev.sorokin.eventmanager.domain.Event;
-import dev.sorokin.eventmanager.domain.Registration;
 import dev.sorokin.eventmanager.entity.EventEntity;
 import dev.sorokin.eventmanager.entity.RegistrationEntity;
 import dev.sorokin.eventmanager.entity.UserEntity;
@@ -24,14 +23,12 @@ public class RegistrationService {
     private final RegistrationRepository repository;
     private final UserRepository userRepository;
     private final EventRepository eventRepository;
-    private final RegistrationMapper mapper;
     private final EventMapper eventMapper;
 
-    public RegistrationService(RegistrationRepository repository, UserRepository userRepository, EventRepository eventRepository, RegistrationMapper mapper, EventMapper eventMapper) {
+    public RegistrationService(RegistrationRepository repository, UserRepository userRepository, EventRepository eventRepository, EventMapper eventMapper) {
         this.repository = repository;
         this.userRepository = userRepository;
         this.eventRepository = eventRepository;
-        this.mapper = mapper;
         this.eventMapper = eventMapper;
     }
 
