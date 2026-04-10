@@ -46,9 +46,9 @@ public class EventService {
         return eventEntities.stream().filter(
                 event ->
                         (event.getStartAt().isAfter(startTime) && event.getStartAt().isBefore(endTime)) ||
-                        (event.getStartAt().plusMinutes(event.getDurationMinutes()).isAfter(startTime) &&
-                                event.getStartAt().plusMinutes(event.getDurationMinutes()).isBefore(endTime)) ||
-                        (event.getStartAt().isBefore(startTime) && event.getStartAt().plusMinutes(event.getDurationMinutes()).isAfter(endTime))
+                        (event.getStartAt().plusMinutes(event.getDurationMinutes()).isAfter(startTime) && event.getStartAt().plusMinutes(event.getDurationMinutes()).isBefore(endTime)) ||
+                        (event.getStartAt().isBefore(startTime) && event.getStartAt().plusMinutes(event.getDurationMinutes()).isAfter(endTime)) ||
+                        (event.getStartAt().isEqual(startTime) || event.getStartAt().plusMinutes(event.getDurationMinutes()).isEqual(endTime))
         ).findFirst();
     }
 

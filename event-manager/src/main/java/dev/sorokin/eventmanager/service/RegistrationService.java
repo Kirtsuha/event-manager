@@ -82,6 +82,7 @@ public class RegistrationService {
         RegistrationEntity registration = repository.findByEventAndUser(event, user)
                 .orElseThrow(() -> new IllegalArgumentException("User does not have a registration for this event"));
         event.getRegistrations().remove(registration);
+        event.setOccupiedPlaces(event.getOccupiedPlaces() - 1);
         user.getRegistrations().remove(registration);
         repository.delete(registration);
         userRepository.save(user);
