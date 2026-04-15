@@ -16,7 +16,7 @@ public class EventSpecification {
             List<Predicate> predicates = new ArrayList<>();
 
             if (dto.getName() != null) {
-                predicates.add(cb.like(cb.lower(root.get("name")),
+                predicates.add(cb.equal(cb.lower(root.get("name")),
                         dto.getName().toLowerCase()));
             }
 

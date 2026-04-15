@@ -72,6 +72,10 @@ public class RegistrationService {
                 .orElseThrow(() -> new UsernameNotFoundException("User with login " + currentUsername + " not found"));
         EventEntity event = eventRepository.findById(id).orElseThrow(() -> new NotFoundException("event", id));
 
+        if (!Objects.equals(event.getStatus(), "WAIT_START")) {
+            throw new IllegalArgumentException("Can't cancel a registration on an event with status: " + event.getStatus());
+        }
+
         if (Objects.equals(user.getRole(), "ADMIN")) {
             throw new AccessDeniedException("This method is only available for regular users, not administrators");
         }
