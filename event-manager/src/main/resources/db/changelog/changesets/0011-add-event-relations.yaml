@@ -1,0 +1,33 @@
+databaseChangeLog:
+  # Добавление колонок location_id и user_id в таблицу events
+  - changeSet:
+      id: 0011-add-event-relations
+      author: course-team
+      changes:
+        # Добавляем колонку user_id
+        - addColumn:
+            tableName: events
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                  # defaultValue: 1
+
+        # Добавляем внешний ключ для user_id
+        - addForeignKeyConstraint:
+            constraintName: fk_event_user
+            baseTableName: events
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+
+        - createIndex:
+            tableName: events
+            indexName: idx_events_user_id
+            columns:
+              - column:
+                  name: user_id

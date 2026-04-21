@@ -2,14 +2,14 @@ package dev.sorokin.eventmanager.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Builder
-@Data
+@Getter
+@Setter
 @Table(name = "location")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,4 +30,7 @@ public class LocationEntity {
 
     @Column(name="description", length = 2000)
     private String description;
+
+    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<EventEntity> events;
 }

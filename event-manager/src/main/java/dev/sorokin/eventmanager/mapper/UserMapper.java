@@ -18,6 +18,16 @@ public class UserMapper {
                 .build();
     }
 
+    public UserEntity domainToEntity(User domain) {
+        return UserEntity.builder()
+                .id(domain.getId())
+                .login(domain.getLogin())
+                .passwordHash(domain.getPassword())
+                .role(String.valueOf(domain.getRole()))
+                .age(domain.getAge())
+                .build();
+    }
+
     public UserDto domainToDto(User user) {
         return UserDto.builder()
                 .id(user.getId())

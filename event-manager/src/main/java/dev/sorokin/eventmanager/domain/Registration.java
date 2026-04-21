@@ -7,14 +7,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Location {
+public class Registration {
     private Long id;
 
-    private String name;
+    private Long eventId;
 
-    private String address;
-
-    private Integer capacity;
-
-    private String description;
+    private Long userId;
 }

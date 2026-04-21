@@ -7,3 +7,19 @@ databaseChangeLog:
       file: db/changelog/changesets/0003-create-user-table.yaml
   - include:
       file: db/changelog/changesets/0004-add-age-to-users.yaml
+  - include:
+      file: db/changelog/changesets/0005-create-events-table.yaml
+  - include:
+      file: db/changelog/changesets/0006-create-registrations-table.yaml
+  - include:
+      file: db/changelog/changesets/0007-add-fk-registrations-to-events.yaml
+  - include:
+      file: db/changelog/changesets/0008-add-fk-registrations-to-users.yaml
+  - include:
+      file: db/changelog/changesets/0009-add-unique-constraint-registrations.yaml
+  - include:
+      file: db/changelog/changesets/0010-add-location-id-to-events.yaml
+  - include:
+      file: db/changelog/changesets/0011-add-event-relations.yaml
+  - include:
+      file: db/changelog/changesets/0012-add-cost-to-events.yaml

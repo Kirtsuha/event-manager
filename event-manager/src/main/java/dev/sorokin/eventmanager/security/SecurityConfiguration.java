@@ -60,6 +60,28 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.PUT, "/locations/**")
                                 .hasAnyAuthority("ADMIN", "ROLE_ADMIN")
 
+                                .requestMatchers(HttpMethod.POST, "/events")
+                                .hasAnyAuthority("USER", "ROLE_USER")
+                                .requestMatchers(HttpMethod.DELETE, "/events/**")
+                                .hasAnyAuthority("ADMIN", "USER", "ROLE_ADMIN", "ROLE_USER")
+                                .requestMatchers(HttpMethod.GET, "/events/**")
+                                .hasAnyAuthority("ADMIN", "USER", "ROLE_ADMIN", "ROLE_USER")
+                                .requestMatchers(HttpMethod.PUT, "/events/**")
+                                .hasAnyAuthority("ADMIN", "USER", "ROLE_ADMIN", "ROLE_USER")
+                                .requestMatchers(HttpMethod.POST, "/events/search")
+                                .hasAnyAuthority("ADMIN", "USER", "ROLE_ADMIN", "ROLE_USER")
+                                .requestMatchers(HttpMethod.GET, "/events/my")
+                                .hasAnyAuthority("USER", "ROLE_USER")
+
+                                .requestMatchers(HttpMethod.POST, "/events/registrations/**")
+                                .hasAnyAuthority("USER", "ROLE_USER")
+                                .requestMatchers(HttpMethod.DELETE, "/events/registrations/cancel/**")
+                                .hasAnyAuthority("USER", "ROLE_USER")
+                                .requestMatchers(HttpMethod.GET, "/events/registrations/my")
+                                .hasAnyAuthority( "USER", "ROLE_USER")
+
+
+
                                 .anyRequest().authenticated())
                 .exceptionHandling(exception ->
                         exception

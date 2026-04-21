@@ -64,6 +64,9 @@ public class LocationService {
         if (entity == null) {
             throw new NotFoundException("Location", id);
         }
+        if (!entity.getEvents().isEmpty()) {
+            throw new IllegalArgumentException("Can't delete a location with events");
+        }
         repository.deleteById(id);
     }
 }
