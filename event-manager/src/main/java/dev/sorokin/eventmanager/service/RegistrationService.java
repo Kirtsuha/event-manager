@@ -6,7 +6,6 @@ import dev.sorokin.eventmanager.entity.RegistrationEntity;
 import dev.sorokin.eventmanager.entity.UserEntity;
 import dev.sorokin.eventmanager.exceptions.NotFoundException;
 import dev.sorokin.eventmanager.mapper.EventMapper;
-import dev.sorokin.eventmanager.mapper.RegistrationMapper;
 import dev.sorokin.eventmanager.repository.EventRepository;
 import dev.sorokin.eventmanager.repository.RegistrationRepository;
 import dev.sorokin.eventmanager.repository.UserRepository;
@@ -102,6 +101,13 @@ public class RegistrationService {
                 .map(RegistrationEntity::getEvent)
                 .map(eventMapper::entityToDomain)
                 .toList();
+    }
+
+    @Transactional
+    public List<Long> getUsersIdByEventId(Long eventId) {
+        List<RegistrationEntity> users = repository.getRegistrationEntityByEvent_Id(eventId);
+        return users.stream().map(RegistrationEntity::getUser)
+                .map(UserEntity::getId).toList();
     }
 
 }

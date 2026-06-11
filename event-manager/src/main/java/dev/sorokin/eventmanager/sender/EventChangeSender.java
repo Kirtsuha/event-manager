@@ -3,6 +3,8 @@ package dev.sorokin.eventmanager.sender;
 import dev.sorokin.eventcommon.EventChangedMessage;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 @Component
 public class EventChangeSender {
@@ -16,6 +18,20 @@ public class EventChangeSender {
     }
 
     public void sendEvent(EventChangedMessage change) {
+        if (TransactionSynchronizationManager.isSynchronizationActive()) {
+            TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+                @Override
+                public void afterCommit() {
+                    send(change);
+                }
+            });
+            return;
+        }
+
+        send(change);
+    }
+
+    private void send(EventChangedMessage change) {
         kafkaTemplate.send(TOPIC, change.eventId(), change);
     }
 }
