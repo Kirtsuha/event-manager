@@ -30,13 +30,15 @@ public class EventService {
     private final LocationRepository locationRepository;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final EventNotificationSender sender;
 
-    public EventService(EventRepository repository, EventMapper mapper, LocationRepository locationRepository, UserRepository userRepository, UserMapper userMapper) {
+    public EventService(EventRepository repository, EventMapper mapper, LocationRepository locationRepository, UserRepository userRepository, UserMapper userMapper, EventNotificationSender sender) {
         this.repository = repository;
         this.mapper = mapper;
         this.locationRepository = locationRepository;
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.sender = sender;
     }
 
     @Transactional
@@ -101,8 +103,13 @@ public class EventService {
         if (!Objects.equals(event.getStatus(), "WAIT_START")) {
             throw new IllegalArgumentException("Can't cancel event with status " + event.getStatus());
         }
+        Event oldEvent = mapper.entityToDomain(event);
+
         event.setStatus("CANCELLED");
-        repository.save(event);
+        EventEntity savedEvent = repository.save(event);
+
+        Event eventCancelled = mapper.entityToDomain(savedEvent);
+        sender.notifyCancelled(oldEvent, eventCancelled, user.getId());
     }
 
     @Transactional
@@ -157,11 +164,14 @@ public class EventService {
         entity.setStartAt(newEvent.getStartAt());
         entity.setDurationMinutes(newEvent.getDurationMinutes());
         entity.setMaxPlaces(newEvent.getMaxPlaces());
-        entity.setLocation(locationRepository.findById(
-                newEvent.getLocationId()).get()
-        );
+        entity.setCost(newEvent.getCost());
+        entity.setLocation(newLocation);
         entity.setName(newEvent.getName());
-        return mapper.entityToDomain(repository.save(entity));
+
+        EventEntity savedEvent = repository.save(entity);
+        Event updatedEvent = mapper.entityToDomain(savedEvent);
+        sender.notifyUpdated(oldEvent, updatedEvent, user.getId());
+        return updatedEvent;
     }
 
     @Transactional
